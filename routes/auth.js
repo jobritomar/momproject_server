@@ -1,20 +1,11 @@
 const router = require("express").Router();
 
-
-const {
- signup,
- login,
- logout,
- isLoggedIn
-} = require("../controllers/auth");
-
-const { isAnon, noAnon } = require("../middlewares/auth");
+const controllers = require("../controllers/auth");
 
 router
-
-  .post("/signup", isAnon, signup)
-  .post("/login", login)
-  .post("/logout", noAnon, logout)
-  .get("/login", isLoggedIn)
+  .post("/logout", controllers.logout)
+  .post("/login", controllers.login)
+  .post("/signup", controllers.signup)
+  .get("/login", controllers.isLoggedIn);
 
 module.exports = router;
