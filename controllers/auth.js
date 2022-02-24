@@ -37,8 +37,11 @@ async function signup(req, res) {
     });
 
     req.session.currentUser = {
-      email: newUser.email,
+      email,
       _id: newUser._id,
+      phone,
+      address,
+      name,
     };
 
     return res.status(200).json({ message: "OK" });
