@@ -10,6 +10,7 @@ const app = express();
 const cors = require("cors");
 const authRoutes = require ("./routes/auth")
 const itemRoutes = require ("./routes/item")
+const orderRoutes = require ("./routes/order")
 
 function sessionConfig() {
   const { NODE_ENV, MONGODB_URL, SESSION_SECRET } = process.env;
@@ -48,11 +49,18 @@ async function start() {
     // cors middleware is to allow request comming from a diferent url than the one hosting the server
     app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }));
 
+
+    app.use(async (req, res, next) => {
+      console.log(req.path, req.method)
+      return next()
+    })
+
     
       
       const { PORT } = process.env;
       app.use("/api", authRoutes);
       app.use("/api/items", itemRoutes )
+      app.use("/api/orders", orderRoutes)
   
       app.get("/", (req, res) => {
         res.status(200).json({ message: "running" });

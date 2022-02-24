@@ -8,7 +8,7 @@ function isObjectId(id) {
 // display all items
 async function allItems(req, res) {
   try {
-    const items = await Recipe.find()
+    const items = await Item.find()
     res.status(200).json(items).end();
   } catch (err) {
     res.status(400).json(err.message).end();
@@ -51,7 +51,7 @@ async function deleteItem(req, res) {
       res.status(400).json("Id not valid").end();
     }
     const item = await Item.findByIdAndDelete(id).lean();
-    res.status(200).json(recipe).end();
+    res.status(200).json(item).end();
   } catch (err) {
     res.status(400).json(err.message).end();
   }
