@@ -8,15 +8,21 @@ const itemSchema = new Schema(
       required: true
     },
     description: {
-      type: String
+      type: String,
+      required: true
     },
 
     price: {
       type: String,
       required: true
     },
+
+    image: {
+      type: String,
+      required: true
+    },
  
   }
 );
-const Item = mongoose.model("item", itemSchema);
+const Item = mongoose.model("Item", itemSchema);
 module.exports = Item;

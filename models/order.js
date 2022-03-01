@@ -7,9 +7,20 @@ const orderSchema = new mongoose.Schema({
       quantity: {
         type: Number,
         required: true,
-        }
+        },
+      
       }
     ],
+    status: {
+      type: String,
+      enum: {
+        values: [
+          "pending",
+          "in_progess",
+          "completed"
+        ]
+      }
+    }
   
 });
 
