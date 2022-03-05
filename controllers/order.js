@@ -7,7 +7,18 @@ const create = async (req, res) => {
     const order = req.body
     console.log({order})
     try {
-        const newOrder = await Order.create({info: order, user: req.session.currentUser, status:"pending"})
+        let prevNumber
+
+        const prevOrder = await Order.findOne().sort('-number')
+
+        if (prevOrder) {
+            prevNumber = prevOrder.number
+        } else {
+            prevNumber = 0
+        }
+
+
+        const newOrder = await Order.create({info: order, user: req.session.currentUser, status:"pending", number: prevNumber+1})
         res.status(200).json({message: "ok", id: newOrder._id})
     } catch (err) {
         res.status(400).json(err.message).end();

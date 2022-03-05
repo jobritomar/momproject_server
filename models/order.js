@@ -20,7 +20,9 @@ const orderSchema = new mongoose.Schema({
           "completed"
         ]
       }
-    }
+    },
+
+    number: Number
   
 });
 
