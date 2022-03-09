@@ -19,7 +19,9 @@ async function allItems(req, res) {
 //  creates the item
 async function createItem(req, res) {
   try {
-    const item = await Item.create(req.body);
+    console.log({req, file: req.file})
+    const { path: image } = req.file;
+    const item = await Item.create({...req.body, image});
     res.status(200).json(item).end();
   } catch (err) {
     res.status(400).json(err.message).end();

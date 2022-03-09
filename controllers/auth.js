@@ -76,7 +76,7 @@ async function login(req, res) {
     if (hasCorrectPassword) {
       const { password, ...currentUser } = user;
       req.session.currentUser = currentUser;
-      return res.status(200).json({ message: "ok" });
+      return res.status(200).json(currentUser);
     }
   } catch (err) {
     if (validationError(err)) {
